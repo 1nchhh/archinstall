@@ -597,7 +597,14 @@ class Installer:
 			mkinit.write(f"BINARIES=({' '.join(self.BINARIES)})\n")
 			mkinit.write(f"FILES=({' '.join(self.FILES)})\n")
 			mkinit.write(f"HOOKS=({' '.join(self.HOOKS)})\n")
+			
+		with open(f'{self.target}/etc/mkinitcpio.d/arch.conf', 'w') as mkinit:
+			mkinit.write(f"MODULES=({' '.join(self.MODULES)})\n")
+			mkinit.write(f"BINARIES=({' '.join(self.BINARIES)})\n")
+			mkinit.write(f"FILES=({' '.join(self.FILES)})\n")
+			mkinit.write(f"HOOKS=({' '.join(self.HOOKS)})\n")
 
+		SysCommand(f'/usr/bin/arch-chroot {self.target} pacman -Sy --noconfirm mkinitcpio')
 		return SysCommand(f'/usr/bin/arch-chroot {self.target} mkinitcpio {" ".join(flags)}').exit_code == 0
 
 	def minimal_installation(self, testing=False, multilib=False) -> bool:
