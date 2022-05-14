@@ -598,7 +598,7 @@ class Installer:
 			mkinit.write(f"FILES=({' '.join(self.FILES)})\n")
 			mkinit.write(f"HOOKS=({' '.join(self.HOOKS)})\n")
 			
-		with open(f'{self.target}/etc/mkinitcpio.d/arch.conf', 'w') as mkinit:
+		with open(f'{self.target}/etc/mkinitcpio.d/arch.preset', 'w') as mkinit:
 			mkinit.write(f"MODULES=({' '.join(self.MODULES)})\n")
 			mkinit.write(f"BINARIES=({' '.join(self.BINARIES)})\n")
 			mkinit.write(f"FILES=({' '.join(self.FILES)})\n")
