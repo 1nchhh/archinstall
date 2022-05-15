@@ -598,7 +598,7 @@ class Installer:
 			mkinit.write(f"FILES=({' '.join(self.FILES)})\n")
 			mkinit.write(f"HOOKS=({' '.join(self.HOOKS)})\n")
 
-		SysCommand(f'/usr/bin/arch-chroot {self.target} pacman -Sy --noconfirm mkinitcpio linux')
+		SysCommand(f'/usr/bin/arch-chroot {self.target} pacman -Sy --noconfirm mkinitcpio {" ".join(self.base_packages)}')
 		return SysCommand(f'/usr/bin/arch-chroot {self.target} mkinitcpio {" ".join(flags)}').exit_code == 0
 
 	def minimal_installation(self, testing=False, multilib=False) -> bool:
